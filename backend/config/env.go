@@ -1,6 +1,11 @@
 package config
 
-import "os"
+import (
+	"fmt"
+	"os"
+
+	"github.com/joho/godotenv"
+)
 
 type config struct{
 	PublicHost string
@@ -11,14 +16,22 @@ type config struct{
 	DbName string 
 }
 
-return config {
-	Publichost :getEnv("PUBLIC_HOST" , "http://localhost"),
-	Port:getEnv("PORT" ,"8080"),
-	DBUser: getEnv("DB_USER", "root"),
-	DBPassword: getEnv ("DB_PASSWORD", "mypassword"),
-	DBAddress: fmt.Sorintf("%s:%s", getEnv ("DB_HOST", "127.0.0.1"), getEnv ("DB_PORT", "3306")),
-	DBName: getEnv("DB_NAME", "ecom"),
+var Envs = intconfig()
 
+func intconfig() config {
+
+godotenv.Load()
+
+return config{
+    PublicHost: getEnv("PUBLIC_HOST", "http://localhost"),
+    Port:       getEnv("PORT", "8080"),
+    DbUser:     getEnv("DB_USER", "root"),
+    DbPassword: getEnv("DB_PASSWORD", "mypassword"),
+    DbAddress:  fmt.Sprintf("%s:%s",
+                  getEnv("DB_HOST", "127.0.0.1"),
+                  getEnv("DB_PORT", "3306")),
+    DbName:     getEnv("DB_NAME", "ecom"),
+}
 
 }
 
@@ -28,6 +41,5 @@ func getEnv(key, fallback string ) string {
 	} 
 	return fallback
 }
-		 
-	
+
 

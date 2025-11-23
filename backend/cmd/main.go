@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/cmd/api"
+	"backend/config"
 	"backend/db"
 	"log"
 
@@ -10,14 +11,18 @@ import (
 
 func main() {
 
-	db,err :=db.MySqlStorage(*mysql.NewConfig()){
-		(User "root"
-		Passwd "asd",
-		Addr "127.0.1:3306",
-		DBName "dbdb",
-		Net "tcp",
-		AllowNativePassword "true",
-		ParseTime: "ture", )
+	db, err :=db.NewMySQLStorage(mysql.Config{
+		User :config.Envs.DbUser,
+		Passwd: config.Envs.DbPassword,
+		Addr: config.Envs.DbAddress,
+		DBName: config.Envs.DbName,
+		Net: "tcp",
+		AllowNativePasswords: true ,
+		ParseTime: true ,
+
+	})
+	if err !=nil{
+		log.Fatal(err)
 	}
 
 
