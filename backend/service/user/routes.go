@@ -14,13 +14,17 @@ func Newhaddler (     )*haddler{
 	return &haddler{}
 }
 
-func (h*Handler) RegisterRoutes(router *mux.Router){
-	router.HandleFunc("/login",h.handleLogin).Methods("POST")
-	router.HandleFunc("/register",h.handleLogin).Methods("POST")
-	router.HandleFunc("/login",h.handleLogin).Methods("POST")
+func (h *haddler ) RegisterRoutes(router *mux.Router){
+	router.HandleFunc("/login",h.haddlerLogin).Methods("POST")
+	router.HandleFunc("/register",h.haddlerLogin).Methods("POST")
+	router.HandleFunc("/login",h.haddlerLogin).Methods("POST")
 
 }
 
-func (h *haddler) haddlerLogin(w *http.ResponseWriter , r *http.Request){
+func (h *haddler) haddlerLogin(w http.ResponseWriter , r *http.Request){
+
+}
+
+func (h *haddler) haddlerRegister(w http.ResponseWriter , r *http.Request){
 	
 }
