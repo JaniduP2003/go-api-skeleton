@@ -22,6 +22,7 @@ func NewAPIserver (addr string , db *sql.DB) *APIserver{
 }
 
 func (s *APIserver) Run() error {
+	
 	router :=mux.NewRouter()
 	subrouter := router.PathPrefix("api/v1").Subrouter()  
 	
