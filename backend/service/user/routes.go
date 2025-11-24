@@ -1,6 +1,8 @@
 package user
 
 import (
+	"encoding/json"
+	"go/types"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -26,6 +28,12 @@ func (h *haddler) haddlerLogin(w http.ResponseWriter , r *http.Request){
 
 func (h *haddler) haddlerRegister(w http.ResponseWriter , r *http.Request){
 	//get json payload (for this use type make a type folder and add the code)
+	if r.Body ==nil{
+
+	}
+
+	var payload types.RegisterUserPayload
+	err :=json.NewDecoder(r.Body).Decode(payload)
 	//ceack if the user exsits
 	 //if it dose not the create him
 	
